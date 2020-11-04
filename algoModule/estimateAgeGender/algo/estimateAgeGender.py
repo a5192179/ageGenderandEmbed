@@ -1,14 +1,30 @@
+libs = []
 # keras==2.1.0
 import numpy as np
 import cv2
-# import sys
-# sys.path.append('.')
+import sys
+sys.path.append('.')
 from algoModule.estimateAgeGender.util.SSR_model import SSR_net
 import algoModule.estimateAgeGender.util.Main_yolo as My
 from algoModule.estimateAgeGender.util.ageLabel import age_label
 import tensorflow as tf
+try:
+    libs.append('tensorflow==' + tf.__version__ + '\n')
+except:
+    libs.append('tensorflow' + '\n')
 from PIL import Image
+import PIL
+try:
+    libs.append('PIL==' + PIL.__version__ + '\n')
+except:
+    libs.append('PIL' + '\n')
 import os
+# =============================
+txtPath = './dependence.txt'
+with open(txtPath, "a") as f:
+    for line in libs:
+        f.write(line)
+# =============================
 
 class ageGenderEstimater:
     def __init__(self, modelFile = './algoModule/estimateAgeGender/model/ssrnet_3_3_3_64_1.0_1.0.h5', pb_path_sex = "./algoModule/estimateAgeGender/model/face_attribute.pb"):

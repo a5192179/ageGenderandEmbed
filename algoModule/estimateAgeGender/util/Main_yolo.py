@@ -1,14 +1,29 @@
+libs = []
 import tensorflow as tf
 import numpy as np
 import colorsys, cv2, os
+# try:
+#     libs.append('colorsys==' + colorsys.__version__ + '\n')
+# except:
+#     libs.append('colorsys' + '\n')
 from timeit import default_timer as timer
 from PIL import Image, ImageFont, ImageDraw
 from keras import backend as K
+import keras
+try:
+    libs.append('keras==' + keras.__version__ + '\n')
+except:
+    libs.append('keras' + '\n')
 from keras.layers import Input
 from algoModule.estimateAgeGender.util.yolo3.model import yolo_eval, yolo_body
 from algoModule.estimateAgeGender.util.yolo3.utils import letterbox_image
 
-
+# =============================
+txtPath = './dependence.txt'
+with open(txtPath, "a") as f:
+    for line in libs:
+        f.write(line)
+# =============================
 class YOLO(object):
     def __init__(self):
         self.anchors_path = os.path.join('./algoModule/estimateAgeGender/configs/yolo_anchors.txt')  # Anchors

@@ -1,10 +1,20 @@
+libs = []
 from flask import Flask
+import flask
+libs.append('flask==' + flask.__version__ + '\n')
 from flask import request
 import json
 from waitress import serve
+import waitress
+try:
+    libs.append('waitress==' + waitress.__version__ + '\n')
+except:
+    libs.append('waitress' + '\n')
 import base64
 import cv2
+libs.append('cv2==' + cv2.__version__ + '\n')
 import numpy as np
+libs.append('numpy==' + np.__version__ + '\n')
 import sys
 sys.path.append('.')
 from web import processJson
@@ -13,9 +23,10 @@ from algoModule.estimateAgeGender.algo import estimateAgeGender
 from algoModule.embedFace.algo import embedFace
 
 # =============================
-# txtPath = './code/dependence.txt'
-# with open(newFilePath, "w") as f:
-#                 f.write(newTest)
+txtPath = './dependence.txt'
+with open(txtPath, "a") as f:
+    for line in libs:
+        f.write(line)
 # =============================
 app = Flask(__name__)
 
