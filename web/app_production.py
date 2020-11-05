@@ -11,6 +11,7 @@ from web import processJson
 # import web.processJson
 from algoModule.estimateAgeGender.algo import estimateAgeGender
 from algoModule.embedFace.algo import embedFace
+import time
 
 # =============================
 # txtPath = './code/dependence.txt'
@@ -55,8 +56,10 @@ def my_encode():
 def queryPersonAttribute():
     data = json.loads(request.get_data())
     print(type(data))
+    ts = time.time()
     with ageGenderEstimater.graph.as_default():
         age, gender = processJson.estimateAgeGender(data, ageGenderEstimater)
+    print('time:', time.time() - ts)
     print("age:", age, "gender:", gender)
     results = {}
     results['age'] = age
@@ -72,7 +75,6 @@ def queryImageFeature():
         imgName, feature = processJson.embedFace(data, faceEmbedder)
     results = {}
     results[imgName] = feature.tolist()
-    a = json.dumps(results)
     return json.dumps(results)
 
 @app.route('/algo/v1/compareSimilarity', methods=['POST'])

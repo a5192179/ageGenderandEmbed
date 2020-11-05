@@ -1,8 +1,8 @@
 # keras==2.1.0
 import numpy as np
 import cv2
-# import sys
-# sys.path.append('.')
+import sys
+sys.path.append('.')
 from algoModule.estimateAgeGender.util.SSR_model import SSR_net
 import algoModule.estimateAgeGender.util.Main_yolo as My
 from algoModule.estimateAgeGender.util.ageLabel import age_label

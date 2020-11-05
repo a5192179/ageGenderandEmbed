@@ -30,5 +30,5 @@ def compareSimilarity(data):
     feature2 = list(data.values())[1]
     arrFeature1 = np.array(feature1)
     arrFeature2 = np.array(feature2)
-    dist = distance.distance(arrFeature1, arrFeature2)
+    dist = distance.distance(arrFeature1, arrFeature2, 1)
     return dist
